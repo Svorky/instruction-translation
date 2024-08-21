@@ -1,0 +1,6 @@
+.card {
+    display: grid;
+    border-style: solid;
+    border-color: aliceblue;
+    border-radius: 10px;
+}

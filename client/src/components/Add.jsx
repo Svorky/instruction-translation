@@ -1,0 +1,64 @@
+import { useEffect, useState } from 'react';
+import './Add.css'
+import axios from 'axios'
+
+const Add = () => {
+    const [languages, setLanguages] = useState([])
+    const [message, setMessage] = useState('')
+
+    useEffect(()=>{
+        getLanguages()
+    },[])
+
+    const getLanguages = async () => {
+        const response = await axios.get(`http://localhost:5005/api/languages`)
+        const data = await response.data
+        setLanguages(data)
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+
+        const formData = new FormData(event.target)
+        const data = Object.fromEntries(formData)
+
+        console.log(data)
+
+        if(data.language === '-1'){
+            console.error('Choose language');
+            return
+        }
+
+        const response = await axios.post(`http://localhost:5005/api/products`, data)
+        const answer = await response.data
+        console.log(answer)
+        if(answer.status === 'success'){
+            setMessage('Record saved')
+        } else {
+            setMessage('error')
+        }
+    }
+
+    return (<>
+        <h1>Add</h1>
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="title" placeholder='Title' required />
+            <select name="language" required >
+                <option value="-1">Select language</option>
+                {
+                    languages.map(
+                        language => <option key={language.id} value={language.id}>{language.name}</option>
+                    )
+                }
+            </select>
+            <textarea className='form-textarea' type="text" name="translation" placeholder='Translation' required />
+            <input type="file" id="picture" name="picture" accept="image/png, image/jpeg" />
+            <input type="number" name='barcode' placeholder='barcode'/>
+
+            <button type="submit">Create</button>
+        </form>
+        <div id='message'>{message}</div>
+    </>);
+};
+
+export default Add;

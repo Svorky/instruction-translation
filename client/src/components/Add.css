@@ -1,0 +1,15 @@
+form {
+    display: grid;
+    gap: 10px;
+}
+
+form input, select {
+    font-size: 1.2rem;
+}
+
+.form-textarea {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    height: 150px;
+    width: 500px;
+}
