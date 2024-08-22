@@ -9,7 +9,7 @@ const ProductCard = (props) => {
             to={ `/product/${id}` }
         >
             <figure>
-                <img src={ picture } alt={ title } />
+                <img src={ `${picture}` } alt={ title } />
             </figure>
             <h3>{ title }</h3>
         </Link>

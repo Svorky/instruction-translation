@@ -18,7 +18,7 @@ const Home = () => {
 
   return (<>
     <h1>Home</h1>
-    <Search />
+    <Search setProducts={setProducts} />
     <h2>Last translations</h2>
     <section className='last-cards'>
       {

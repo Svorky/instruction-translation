@@ -30,7 +30,8 @@ const Product = () => {
     <h2>{product.title}</h2>
     <div>Added {new Date(Date.parse(product.date)).toLocaleString()}</div>
     <figure>
-      <img src={product.picture} alt={product.title} />
+      <img src={`${product.picture}`} alt={product.title} />
+      <figcaption>Edit picture</figcaption>
     </figure>
     <section>
       {

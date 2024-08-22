@@ -4,3 +4,13 @@
     border-color: aliceblue;
     border-radius: 10px;
 }
+
+.card figure {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.card figure img {
+    max-width: 300px;
+    max-height: 300px;
+}

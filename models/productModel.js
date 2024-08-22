@@ -1,24 +1,24 @@
 import { db } from "../config/db.js";
 import * as translationModel from './translationModel.js'
 import * as languageModel from './languageModel.js'
+import * as pictureModel from './pictureModel.js'
 
 const TABLENAME = 'products';
-const TABLEFIELDS = ["id", "title", "barcode", 'picture', "date"];
+const TABLEFIELDS = ["id", "title", "barcode", "date"];
 
 db.schema.hasTable(TABLENAME).then(function (exists) {
     if(!exists) {
         return db.schema.createTable(TABLENAME, function (t) {
             t.increments('id').primary();
             t.string('title', 50).notNullable();
-            t.bigInteger('barcode').nullable();
+            t.string('barcode', 50).nullable();
             t.datetime('date').defaultTo(db.fn.now(6));;
-            t.binary('picture');
         }); 
     }
 });
 
 export const insertRecord = async (args) => {
-    let { title, language, translation, barcode } = args
+    let { title, language, translation, barcode, picture } = args
 
     if(barcode === ''){
         barcode = null
@@ -30,6 +30,9 @@ export const insertRecord = async (args) => {
         const productID = await trx(TABLENAME)
         .insert({title, barcode})
         .returning("id");
+
+        await pictureModel.insertRecordTRX(trx, {product_id: productID[0].id, picture, active: true})
+
         const translationID = await translationModel.insertRecordTRX(trx,
             {
                 product_id: productID[0].id,
@@ -57,7 +60,9 @@ export function getAllRecords() {
 
 export const getLastProducts = () => {
     return db(TABLENAME)
-        .select(['id', 'title', 'picture', 'date'])
+    .leftJoin('pictures', 'pictures.product_id', 'products.id')
+        .select('products.id', 'products.title', 'products.date', 'pictures.picture', 'pictures.active')
+        // .where('pictures.active','=',true)
         .limit(5)
         .orderBy("date",'desc');
 }
@@ -72,7 +77,7 @@ export const getProduct = async (id) => {
         const {id: productID, title, picture, date} = product[0]
         const obj = {
             title,
-            picture,
+            picture: picture?.toString(),
             date,
             translations: []
         }
@@ -100,4 +105,11 @@ export const getProduct = async (id) => {
         await trx.rollback()
         throw error
     }
+}
+
+export const searchRecord = (query) => {
+    return db(TABLENAME)
+        .select('id', 'title', 'barcode', 'picture')
+        .whereILike('title', `%${query}%`)
+        .orWhereILike('barcode', `%${query}%`);
 }
