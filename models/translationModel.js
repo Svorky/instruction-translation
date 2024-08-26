@@ -47,3 +47,21 @@ export const getTranslation = async (trx, productID) => {
         .select(TABLEFIELDS)
         .where({ product_id: productID, active: true });
 };
+
+export const updateTranslation = async (args) => {
+    const trx = await db.transaction();
+    try {
+
+        const oldTranslation = await trx(TABLENAME)
+            .update('active', false)
+            .where({id: args.translation_id});
+        const { translation_id, ...rest} = args
+        
+        const newTranslation = await insertRecordTRX(trx, rest);
+        await trx.commit();
+        return newTranslation;
+    } catch(error) {
+        console.error(error);
+        await trx.rollback();
+    }
+};

@@ -3,3 +3,30 @@
     border-radius: 5px;
     padding: 5px;
 }
+
+.product-image img {
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.input-position {
+    width: 50%;
+    position: relative;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+}
+
+.translations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.translations textarea {
+    display: block;
+}

@@ -41,7 +41,6 @@ const Add = () => {
 
         if(data.picture) {
             reader.readAsDataURL(data.picture);
-            data.pictureString = reader.result;
         }
 
         console.log(data);

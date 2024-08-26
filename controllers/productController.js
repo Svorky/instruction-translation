@@ -1,7 +1,7 @@
 import * as model from '../models/productModel.js';
 
 export const createRecord = async (req, res) => {
-    const { title, language, translation, picture, pictureString, barcode } = req.body;
+    const { title, language, translation, pictureString, barcode } = req.body;
     model.insertRecord({ title, language, translation, barcode, picture: pictureString })
         .then(result => res.json({
             status: "success",

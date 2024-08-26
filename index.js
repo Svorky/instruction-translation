@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { languageRouter } from './routes/languageRouter.js';
 import { translationRouter } from './routes/translationRouter.js';
 import { searchRouter } from './routes/searchRoute.js';
+import { pictureRouter } from './routes/pictureRouter.js';
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,7 @@ app.listen(process.env.PORT || 5005, () => {
 app.use('/api/products', productRouter)
 app.use('/api/languages', languageRouter)
 app.use('/api/translations', translationRouter)
+app.use('/api/picture', pictureRouter)
 app.use('/search', searchRouter)
 
 // Have Node serve the files for our built React app

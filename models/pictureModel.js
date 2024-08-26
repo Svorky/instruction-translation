@@ -18,7 +18,8 @@ db.schema.hasTable(TABLENAME).then(function (exists) {
 
 export const insertRecord = (args) => {
     return db(TABLENAME)
-        .insert(args);
+        .insert(args)
+        .returning(['id','picture']);
 }
 
 export const insertRecordTRX = async (trx, args) => {

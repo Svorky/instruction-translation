@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const AddLanguage = (props) => {
     const { id } = useParams();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { usedLanguages } = props;
     const [languages, setLanguages] = useState([]);
 
@@ -24,18 +24,19 @@ const AddLanguage = (props) => {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         console.log(data);
+        
         if(data.language === '-1') {
             console.error('Choose language');
             return;
         } else {
-            data.productID = id
-            const resposnse = await axios.post(`http://localhost:5005/api/translations`, data)
-            const answer = await resposnse.data
-            if(answer.status === 'success'){
-                navigate(0)
+            data.productID = id;
+            const resposnse = await axios.post(`http://localhost:5005/api/translations`, data);
+            const answer = await resposnse.data;
+            if(answer.status === 'success') {
+                navigate(0);
             } else {
                 console.error(answer);
-                
+
             }
         }
     };
@@ -57,6 +58,10 @@ const AddLanguage = (props) => {
                         )
                     }
                 </select>
+                <div>
+                    <input type="checkbox" name="original" id="original" />
+                    <label htmlFor="original">Original language</label>
+                </div>
                 <textarea className='form-textarea' type="text" name="translation" placeholder='Translation' required />
                 <button type="submit">Save</button>
             </form>
