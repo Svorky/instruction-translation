@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const AddLanguage = (props) => {
     const { id } = useParams();
@@ -70,3 +71,7 @@ const AddLanguage = (props) => {
 };
 
 export default AddLanguage;
+
+AddLanguage.propTypes = {
+    usedLanguages: PropTypes.arrayOf(PropTypes.string).isRequired
+}

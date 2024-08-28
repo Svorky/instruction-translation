@@ -1,15 +1,20 @@
 import express from "express";
 import cors from "cors";
-import path from "path";
+import cookieParser from'cookie-parser';
 import { productRouter } from './routes/productRoute.js';
 import bodyParser from 'body-parser';
 import { languageRouter } from './routes/languageRouter.js';
 import { translationRouter } from './routes/translationRouter.js';
 import { searchRouter } from './routes/searchRoute.js';
 import { pictureRouter } from './routes/pictureRouter.js';
+import userRouter from './routes/userRouter.js';
 
 const app = express();
-app.use(cors());
+app.use(cookieParser())
+app.use(cors({
+  credentials:true,
+  origin: ['http://localhost:5173']
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({limit: '1mb'}));
 
@@ -26,6 +31,7 @@ app.use('/api/languages', languageRouter)
 app.use('/api/translations', translationRouter)
 app.use('/api/picture', pictureRouter)
 app.use('/search', searchRouter)
+app.use("/user", userRouter);
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.resolve(__dirname, "./client/build")));

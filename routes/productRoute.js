@@ -6,5 +6,5 @@ export const productRouter = express.Router();
 productRouter.get('/', controller.getAllRecords);
 productRouter.get('/id/:id',controller.getProductById)
 productRouter.get('/last', controller.getLastProducts);
-productRouter.post('/', verifyToken,controller.createRecord);
+productRouter.post('/',controller.createRecord);
 // productRouter.delete('/:id',controller.deleteRecord)
