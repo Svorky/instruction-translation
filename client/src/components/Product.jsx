@@ -92,15 +92,7 @@ const Product = () => {
               </figcaption>
               {editPicture && (
                   <>
-                      {/* <input
-                          type='file'
-                          id='picture'
-                          name='picture'
-                          accept='image/png, image/jpeg'
-                          required
-                          onChange={handleChangePicture}
-                      /> */}
-                      <ImagePreview />
+                      <ImagePreview onChange={handleChangePicture} />
                       <button disabled={saveButtonDisabled} onClick={handleNewPicture}>Save</button>
                   </>
               )}

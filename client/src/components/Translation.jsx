@@ -26,12 +26,12 @@ const Translation = (props) => {
       update
     );
     const data = await response.data;
-    // navigate(0)
+    navigate(0)
   }
 
   return (<div>
     <h4>Language { language } { original && <span className='original'>Original</span> }</h4>
-    <textarea ref={textareaRef} className='translation-textarea' disabled={ disabled } >{translation}</textarea>
+    <textarea ref={textareaRef} className='translation-textarea' disabled={ disabled } defaultValue={translation}></textarea>
     <div>
       {disabled && <button onClick={ handleEdit }>Edit translation</button>}
       { !disabled && <button onClick={handleSave}>Save</button> }

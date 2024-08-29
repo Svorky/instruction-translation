@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import './ImagePreview.css'
+import PropTypes from 'prop-types';
 
-const ImagePreview = () => {
+const ImagePreview = (props) => {
+    const { onChange } = props
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState();
 
@@ -24,6 +26,8 @@ const ImagePreview = () => {
         }
 
         setSelectedFile(e.target.files[0]);
+
+        if(onChange) onChange(e)
     };
 
     return (
@@ -35,3 +39,7 @@ const ImagePreview = () => {
 };
 
 export default ImagePreview;
+
+ImagePreview.propTypes = {
+    onChange: PropTypes.func
+}
