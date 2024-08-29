@@ -118,7 +118,10 @@ export const getProduct = async (id) => {
 
 export const searchRecord = (query) => {
     return db(TABLENAME)
-        .select('id', 'title', 'barcode', 'picture')
+        // .select('id', 'title', 'barcode')
+        .leftJoin('pictures', 'pictures.product_id', 'products.id')
+        .select('products.id', 'products.title', 'products.barcode', 'pictures.picture', 'pictures.active')
+        .where('pictures.active','=',true)
         .whereILike('title', `%${query}%`)
         .orWhereILike('barcode', `%${query}%`);
 };

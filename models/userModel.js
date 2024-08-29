@@ -2,7 +2,6 @@ import { db } from "../config/db.js";
 import { hash } from "bcrypt";
 
 const TABLENAME = 'users';
-const TABLEFIELDS = ["id", "product_id", "language_id", "translation", 'original', "active", "date"];
 
 db.schema.hasTable(TABLENAME).then(function (exists) {
     if(!exists) {
@@ -11,6 +10,7 @@ db.schema.hasTable(TABLENAME).then(function (exists) {
             t.string('email',50).notNullable()
             t.string('password',500).notNullable()
             t.string('token',500)
+            t.string('role', 50).defaultTo('user')
         });
     }
 });
@@ -46,7 +46,7 @@ export async function createUser(userinfo) {
 export async function getUserByUsername(email = "", username = "") {
   try {
     const user = await db(TABLENAME)
-      .select("id", "email", "password")
+      .select("id", "email", "password", 'role')
       .where("email", email)
       .first();
     return user;
