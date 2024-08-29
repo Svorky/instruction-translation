@@ -28,7 +28,7 @@ const LoginRegister = (props) => {
                     localStorage.setItem('token', response.data.token)
                     localStorage.setItem('user', response.data.user.email)
                     setUser({token: response.data.token, user: response.data.user.email});
-                    navigate("/");
+                    navigate(-1);
                 }
             } catch(error) {
                 console.error(error);
