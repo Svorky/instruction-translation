@@ -18,7 +18,7 @@ const LoginRegister = (props) => {
         if(title === "Login") {
             try {
                 const response = await axios.post(
-                    `${import.meta.env.VITE_API_URL}/user/login`,
+                    `/user/login`,
                     { email, password },
                     { withCredentials: true }
                 );
@@ -37,7 +37,7 @@ const LoginRegister = (props) => {
         } else {
             try {
                 const response = await axios.post(
-                    `${import.meta.env.VITE_API_URL}/user/register`,
+                    `/user/register`,
                     { email, password },
                     { withCredentials: true }
                 );
