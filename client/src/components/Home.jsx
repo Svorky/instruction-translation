@@ -12,7 +12,7 @@ const Home = () => {
   },[])
 
   const getLastProducts = async () => {
-    const response = await axios.get(`http://localhost:5005/api/products/last`)
+    const response = await axios.get(`/api/products/last`)
     const data = response.data
     setProducts(data)
   }

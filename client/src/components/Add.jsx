@@ -19,7 +19,7 @@ const Add = () => {
 
 
     const getLanguages = async () => {
-        const response = await axios.get(`http://localhost:5005/api/languages`);
+        const response = await axios.get(`/api/languages`);
         const data = await response.data;
         setLanguages(data);
     };
@@ -37,7 +37,7 @@ const Add = () => {
             // console.log('reader.result', reader.result)
             // console.log('data', data)
 
-            const response = await axios.post(`http://localhost:5005/api/products`, data);
+            const response = await axios.post(`/api/products`, data);
             const answer = await response.data;
             console.log(answer);
             if(answer.status === 'success') {

@@ -11,7 +11,7 @@ const Search = (props) => {
         if(!input) return
         if(input.value === '') return 
 
-        const response = await axios.get(`http://localhost:5005/search/${input.value}`)
+        const response = await axios.get(`/search/${input.value}`)
         const data = await response.data
         console.log(data)
         setProducts(data)

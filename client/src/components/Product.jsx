@@ -27,13 +27,13 @@ const Product = () => {
   }, []);
 
   const getProduct = async (id) => {
-    const response = await axios.get(`http://localhost:5005/api/products/id/${id}`);
+    const response = await axios.get(`/api/products/id/${id}`);
     const data = await response.data;
     setProduct(data);
   };
 
   const loadNewPicture = async (picture) => {
-    const response = await axios.post(`http://localhost:5005/api/picture/add`,
+    const response = await axios.post(`/api/picture/add`,
       {
         product_id: id,
         picture

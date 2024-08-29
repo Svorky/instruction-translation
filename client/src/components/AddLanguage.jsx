@@ -15,7 +15,7 @@ const AddLanguage = (props) => {
     }, []);
 
     const getLanguages = async () => {
-        const response = await axios.get(`http://localhost:5005/api/languages`);
+        const response = await axios.get(`/api/languages`);
         const data = await response.data;
         setLanguages(data);
     };
@@ -32,7 +32,7 @@ const AddLanguage = (props) => {
             return;
         } else {
             data.productID = id;
-            const resposnse = await axios.post(`http://localhost:5005/api/translations`, data);
+            const resposnse = await axios.post(`/api/translations`, data);
             const answer = await resposnse.data;
             if(answer.status === 'success') {
                 navigate(0);

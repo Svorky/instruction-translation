@@ -10,7 +10,7 @@ export const Auth = ({children}) => {
   },[])
   const verify = async() => {
     try {
-        const response = await axios.get('http://localhost:5000/user/auth',
+        const response = await axios.get('/user/auth',
             {
                 headers:{
                     'x-access-token': 'token'
