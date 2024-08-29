@@ -10,7 +10,7 @@ export const Auth = ({children}) => {
   },[])
   const verify = async() => {
     try {
-        const response = await axios.get('/user/auth',
+        const response = await axios.get(`${import.meta.env.VITE_API_URL || ''}/user/auth`,
             {
                 headers:{
                     'x-access-token': 'token'

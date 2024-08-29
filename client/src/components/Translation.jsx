@@ -28,7 +28,7 @@ const Translation = (props) => {
   const handleSave = async () => {
     const update = {translation_id, product_id, language_id, translation: textareaRef.current.value, original}
     console.log(update)
-    const response = await axios.post(`/api/translations/update`,
+    const response = await axios.post(`${import.meta.env.VITE_API_URL || ''}/api/translations/update`,
       update
     );
     const data = await response.data;

@@ -12,7 +12,7 @@ const Home = () => {
   },[])
 
   const getLastProducts = async () => {
-    const response = await axios.get(`/api/products/last`)
+    const response = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/products/last`)
     const data = response.data
     setProducts(data)
   }
