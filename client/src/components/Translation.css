@@ -1,0 +1,9 @@
+.translation-textarea {
+    max-width: 500px;
+    width: 500px;
+    min-height: 3em;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    field-sizing: content;
+    margin-bottom: 10px;
+}

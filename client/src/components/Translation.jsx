@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './Translation.css'
 
 const Translation = (props) => {
   const { id: product_id } = useParams();
@@ -28,15 +29,15 @@ const Translation = (props) => {
     // navigate(0)
   }
 
-  return (<>
+  return (<div>
     <h4>Language { language } { original && <span className='original'>Original</span> }</h4>
-    <textarea ref={textareaRef} className='form-textarea' disabled={ disabled } >{translation}</textarea>
+    <textarea ref={textareaRef} className='translation-textarea' disabled={ disabled } >{translation}</textarea>
     <div>
       {disabled && <button onClick={ handleEdit }>Edit translation</button>}
       { !disabled && <button onClick={handleSave}>Save</button> }
       { !disabled && <button onClick={handleCancel}>Cancel</button> }
     </div>
-  </>
+  </div>
   );
 };
 

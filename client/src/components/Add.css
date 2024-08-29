@@ -1,9 +1,12 @@
-form {
-    display: grid;
+.addform {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+    width: 500px;
+    margin: 0 auto;
 }
 
-form input, select {
+.addform input, select {
     font-size: 1.2rem;
 }
 
@@ -11,5 +14,6 @@ form input, select {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.2rem;
     height: 150px;
-    width: 500px;
-}
+    /* width: 500px; */
+}   
+

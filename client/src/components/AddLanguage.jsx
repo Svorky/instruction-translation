@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './AddLanguage.css'
 
 const AddLanguage = (props) => {
     const { id } = useParams();
@@ -44,7 +45,7 @@ const AddLanguage = (props) => {
 
     return (
         <>
-            <form onSubmit={ handleSubmit }>
+            <form onSubmit={ handleSubmit } className='addlanguageform'>
                 <select name="language" required >
                     <option value="-1">Select language</option>
                     {

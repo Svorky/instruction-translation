@@ -9,6 +9,7 @@ import {
   MOUSE_ACTIVATION,
   TOUCH_ACTIVATION
 } from "@vanyapr/react-image-magnifiers";
+import ImagePreview from './ImagePreview.jsx';
 
 const Product = () => {
   const { id } = useParams();
@@ -70,7 +71,7 @@ const Product = () => {
   if(!product) return <></>;
 
   return (
-      <>
+      <main className='product'>
           <h2>{product.title}</h2>
           <div>Added {new Date(Date.parse(product.date)).toLocaleString()}</div>
           <figure className='flex'>
@@ -91,14 +92,15 @@ const Product = () => {
               </figcaption>
               {editPicture && (
                   <>
-                      <input
+                      {/* <input
                           type='file'
                           id='picture'
                           name='picture'
                           accept='image/png, image/jpeg'
                           required
                           onChange={handleChangePicture}
-                      />
+                      /> */}
+                      <ImagePreview />
                       <button disabled={saveButtonDisabled} onClick={handleNewPicture}>Save</button>
                   </>
               )}
@@ -117,7 +119,7 @@ const Product = () => {
                           );
                       })}
           </section>
-          <button onClick={handleAddLanguage}>
+          <button onClick={handleAddLanguage} className='addlanguagebtn'>
               {addLanguage ? "Close" : "Add Language"}
           </button>
           {addLanguage && (
@@ -125,7 +127,7 @@ const Product = () => {
                   usedLanguages={product.translations.map((t) => t.language)}
               />
           )}
-      </>
+      </main>
   );
 };
 
