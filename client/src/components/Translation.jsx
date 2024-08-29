@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Translation.css'
+import { UserContext } from '../context/UserContext.jsx';
 
 const Translation = (props) => {
   const { id: product_id } = useParams();
@@ -9,9 +10,14 @@ const Translation = (props) => {
   const [disabled, setDisabled] = useState(true);
   const textareaRef = useRef(translation)
   const navigate = useNavigate()
+  const { user } = useContext(UserContext)
 
   const handleEdit = () => {
-    setDisabled(false);
+    if(user.token){
+      setDisabled(false);
+    } else {
+      navigate('/login')
+    }
   };
 
   const handleCancel = () => {

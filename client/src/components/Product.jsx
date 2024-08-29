@@ -1,6 +1,6 @@
 import './Product.css';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Translation from './Translation.jsx';
 import AddLanguage from './AddLanguage.jsx';
@@ -10,6 +10,7 @@ import {
   TOUCH_ACTIVATION
 } from "@vanyapr/react-image-magnifiers";
 import ImagePreview from './ImagePreview.jsx';
+import { UserContext } from '../context/UserContext.jsx';
 
 const Product = () => {
   const { id } = useParams();
@@ -19,6 +20,7 @@ const Product = () => {
   const [saveButtonDisabled, setSaveButtonDisabled] = useState(true)
   const [pictureData, setPictureData] = useState();
   const navigate = useNavigate()
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
     getProduct(id);
@@ -44,11 +46,19 @@ const Product = () => {
   }
 
   const handleAddLanguage = () => {
-    setAddLanguage(prev => !prev);
+    if(user.token){
+      setAddLanguage(prev => !prev);
+    } else {
+      navigate('/login')
+    }
   };
 
   const handleEditPicture = () => {
-    setEditPicture(prev => !prev)
+    if(user.token){
+      setEditPicture(prev => !prev)
+    } else {
+      navigate('/login')
+    }
   }
 
   const handleChangePicture = () => {
