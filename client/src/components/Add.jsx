@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Add.css';
 import axios from 'axios';
+import { UserContext } from '../context/UserContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Add = () => {
     const [languages, setLanguages] = useState([]);
     const [message, setMessage] = useState('');
+    const navigate = useNavigate()
+    const { user } = useContext(UserContext)
+
+    if(!user?.token) navigate('/login')
 
     useEffect(() => {
         getLanguages();
@@ -34,6 +40,7 @@ const Add = () => {
             console.log(answer);
             if(answer.status === 'success') {
                 setMessage('Record saved');
+                navigate(`/product/${answer.data[0].id}`)
             } else {
                 setMessage('error');
             }

@@ -10,6 +10,7 @@ const Home = () => {
   useEffect(()=>{
     getLastProducts()
   },[])
+
   const getLastProducts = async () => {
     const response = await axios.get(`http://localhost:5005/api/products/last`)
     const data = response.data

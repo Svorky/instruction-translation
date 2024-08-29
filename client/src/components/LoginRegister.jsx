@@ -1,8 +1,9 @@
 import { Box, Button, TextField } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { UserContext } from '../context/UserContext.jsx';
 
 const LoginRegister = (props) => {
     const { title } = props;
@@ -11,20 +12,25 @@ const LoginRegister = (props) => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
+    const { setUser } = useContext(UserContext);
+
     const loginregister = async () => {
-        if (title === "Login") {
+        if(title === "Login") {
             try {
                 const response = await axios.post(
                     `${import.meta.env.VITE_API_URL}/user/login`,
                     { email, password },
                     { withCredentials: true }
                 );
-                if (response.status === 200) {
+                if(response.status === 200) {
                     setMessage(response.data.message);
                     console.log(response.data);
+                    localStorage.setItem('token', response.data.token)
+                    localStorage.setItem('user', response.data.user.email)
+                    setUser({token: response.data.token, user: response.data.user.email});
                     navigate("/");
                 }
-            } catch (error) {
+            } catch(error) {
                 console.error(error);
                 setMessage(error.response.data.message);
             }
@@ -35,15 +41,17 @@ const LoginRegister = (props) => {
                     { email, password },
                     { withCredentials: true }
                 );
-                if (response.status === 201) {
+                if(response.status === 201) {
                     setMessage(response.data.message);
                     console.log(response.data);
+                    // localStorage.setItem('token', response.data.token)
+                    // localStorage.setItem('user', response.data.user.email)
                     navigate("/login");
-                } else if (response.status === 200) {
+                } else if(response.status === 200) {
                     setMessage(response.data.message);
                     console.log(response.data);
                 }
-            } catch (error) {
+            } catch(error) {
                 console.error(error);
                 setMessage(error.response.data.message);
             }
@@ -52,40 +60,40 @@ const LoginRegister = (props) => {
 
     return (
         <>
-            <h2>{title}</h2>
-            <Box component={"form"} sx={{ m: 1 }} noValidate autoComplete='off'>
+            <h2>{ title }</h2>
+            <Box component={ "form" } sx={ { m: 1 } } noValidate autoComplete='off'>
                 <TextField
-                    sx={{
+                    sx={ {
                         m: 1,
                         label: { color: "white" },
                         input: { color: "white" },
                         fieldSet: { borderColor: "#1976d2" },
-                    }}
+                    } }
                     id='email'
                     type='email'
                     label='Enter email'
                     variant='outlined'
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={ (e) => setEmail(e.target.value) }
                 />
 
                 <TextField
-                    sx={{
+                    sx={ {
                         m: 1,
                         label: { color: "white" },
                         input: { color: "white" },
                         fieldSet: { borderColor: "#1976d2" },
-                    }}
+                    } }
                     id='password'
                     type='password'
                     label='Enter password'
                     variant='outlined'
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={ (e) => setPassword(e.target.value) }
                 />
             </Box>
-            <Button variant='contained' onClick={loginregister}>
-                {title}
+            <Button variant='contained' onClick={ loginregister }>
+                { title }
             </Button>
-            <div>{message}</div>
+            <div>{ message }</div>
         </>
     );
 };
@@ -95,3 +103,4 @@ export default LoginRegister;
 LoginRegister.propTypes = {
     title: PropTypes.string.isRequired,
 };
+
