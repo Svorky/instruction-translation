@@ -33,6 +33,7 @@ const Add = () => {
         // console.log(event.target.picture.files[0])
         const reader = new FileReader();
         reader.onloadend = async () => {
+            data.user = user.user;
             data.pictureString = reader.result; //.split(',')[1]; // Base64 string
             // console.log('reader.result', reader.result)
             // console.log('data', data)

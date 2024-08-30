@@ -14,7 +14,7 @@ const Home = () => {
   const getLastProducts = async () => {
     const response = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/products/last`)
     const data = response.data
-    setProducts(data)
+    setProducts([...data])
   }
 
   return (<>
@@ -23,7 +23,7 @@ const Home = () => {
     <h2>Last translations</h2>
     <section className='last-cards'>
       {
-        products.map(
+        products && products.map(
           product => <ProductCard key={product.id} {...product}/>
         )
       }

@@ -29,7 +29,7 @@ const Product = () => {
   const getProduct = async (id) => {
     const response = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/products/id/${id}`);
     const data = await response.data;
-    setProduct(data);
+    setProduct(data[0]);
   };
 
   const loadNewPicture = async (picture) => {

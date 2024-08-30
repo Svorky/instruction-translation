@@ -10,6 +10,7 @@ import { pictureRouter } from './routes/pictureRouter.js';
 import userRouter from './routes/userRouter.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { userProductRouter } from './routes/userProductRoute.js';
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
 
@@ -17,7 +18,7 @@ const app = express();
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  // origin: ['http://localhost:5173']
+  origin: ['http://localhost:5173']
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '1mb' }));
@@ -36,6 +37,7 @@ app.use('/api/translations', translationRouter);
 app.use('/api/picture', pictureRouter);
 app.use('/search', searchRouter);
 app.use("/user", userRouter);
+app.use('/api/userproducts', userProductRouter)
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "./client/dist")));

@@ -8,6 +8,7 @@ import LoginRegister from './components/LoginRegister.jsx';
 import { Auth } from './auth/Auth.jsx';
 import { UserContext } from './context/UserContext.jsx';
 import { useEffect, useState } from 'react';
+import User from './components/User.jsx';
 
 function App() {
   const [user, setUser] = useState({});
@@ -32,6 +33,7 @@ function App() {
           <Route path='product/:id' element={ <Product /> } />
           <Route path='/login' element={ <LoginRegister title={ 'Login' } /> } />
           <Route path='/register' element={ <LoginRegister title={ 'Registration' } /> } />
+          <Route path='/user' element={<User />} />
         </Routes>
       </UserContext.Provider>
     </>

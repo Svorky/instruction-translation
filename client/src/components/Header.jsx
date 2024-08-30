@@ -28,7 +28,7 @@ const Header = () => {
                     {
                         user.user && 
                         <>
-                            <span>{ user.user }</span>
+                            <NavLink to={'/user'}>{ user.user }</NavLink>
                             <Link onClick={handleExit}>Exit</Link>
                         </>
                     }
