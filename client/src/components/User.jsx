@@ -6,29 +6,32 @@ import axios from 'axios';
 
 const User = () => {
     const { user } = useContext(UserContext);
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
 
-    useEffect(()=>{
-        fetchUserProducts()
-    },[])
+    useEffect(() => {
+        fetchUserProducts();
+    }, []);
 
     const fetchUserProducts = async () => {
         const responseProductIDs = await axios.post(`${import.meta.env.VITE_API_URL || ''}/api/userproducts`,
-            {user: user.user}
-        )
-        const productIDs = await responseProductIDs.data
-        
-        setProducts(productIDs)
-    }
+            { user: user.user }
+        );
+        const productIDs = await responseProductIDs.data;
+
+        setProducts(productIDs);
+    };
 
     return (
         <main>
             <h1>{ user.user }</h1>
-            {
-                products && products.map(
-                    product => <ProductCard key={product.id} {...product} />
-                )
-            }
+            <h2>Your products</h2>
+            <section className='user-products'>
+                {
+                    products && products.map(
+                        product => <ProductCard key={ product.id } { ...product } />
+                    )
+                }
+            </section>
         </main>
     );
 };
