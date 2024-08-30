@@ -13,7 +13,7 @@ const Home = () => {
 
   const getLastProducts = async () => {
     const response = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/products/last`)
-    const data = response.data
+    const data = await response.data
     setProducts([...data])
   }
 
