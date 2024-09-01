@@ -90,6 +90,7 @@ export const getProduct = async (ids) => {
                 .orderBy('date', 'desc');
 
             const obj = {
+                id: productID,
                 title,
                 picture: picture[0]?.picture?.toString(),
                 date,
